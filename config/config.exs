@@ -13,7 +13,7 @@ config :ksuite_acl,
 # Configures the endpoint
 config :ksuite_acl, KSuiteACLWeb.Endpoint,
   url: [host: "localhost"],
-  adapter: Phoenix.Endpoint.Cowboy2Adapter,
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [json: KSuiteACLWeb.ErrorJSON],
     layout: false

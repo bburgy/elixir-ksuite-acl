@@ -7,7 +7,7 @@ defmodule KSuiteACLWeb.KdriveController do
 
   def pass_thru(conn, %{"file_id" => id}) when is_integer(id) do
     with {:ok, response} <- KsuiteClient.download(id) do
-      conn |> put_tesla_response(response)
+      put_tesla_response(conn, response)
     else
       _ ->
         conn
@@ -19,7 +19,7 @@ defmodule KSuiteACLWeb.KdriveController do
   def pass_thru(conn, %{"file_id" => raw_id}) do
     with {file_id, _} <- Integer.parse(raw_id),
          {:ok, response} <- KsuiteClient.download(file_id) do
-      conn |> put_tesla_response(response)
+      put_tesla_response(conn, response)
     else
       :error ->
         conn

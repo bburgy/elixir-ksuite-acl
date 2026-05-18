@@ -34,7 +34,7 @@ defmodule KSuiteACLWeb.CalendarController do
 
     Logger.info("Reading the events from the calendar #{calendar_id} ...")
 
-    client |> CalDAVClient.Event.get_events(calendar_url, from, to)
+    CalDAVClient.Event.get_events(client, calendar_url, from, to)
   end
 
   defp send_response(conn, {:ok, events}),

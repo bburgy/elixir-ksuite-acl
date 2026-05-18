@@ -3,7 +3,7 @@ defmodule KSuiteACLWeb.KdriveController do
 
   alias KSuiteACL.KsuiteClient
 
-  action_fallback KSuiteACL.FallbackController
+  action_fallback KSuiteACLWeb.FallbackController
 
   def pass_thru(conn, %{"file_id" => id}) when is_integer(id) do
     with {:ok, response} <- KsuiteClient.download(id) do

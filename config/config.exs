@@ -13,7 +13,7 @@ config :ksuite_acl,
 # Configures the endpoint
 config :ksuite_acl, KSuiteACLWeb.Endpoint,
   url: [host: "localhost"],
-  adapter: Phoenix.Endpoint.Cowboy2Adapter,
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [json: KSuiteACLWeb.ErrorJSON],
     layout: false
@@ -30,7 +30,9 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Tesla
-config :tesla, adapter: Tesla.Adapter.Hackney
+config :tesla,
+  adapter: Tesla.Adapter.Hackney,
+  disable_deprecated_builder_warning: true
 
 # TzData
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase

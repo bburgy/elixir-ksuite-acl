@@ -38,8 +38,7 @@ defmodule KSuiteACLWeb do
   def controller do
     quote do
       use Phoenix.Controller,
-        formats: [:html, :json],
-        layouts: [html: KSuiteACLWeb.Layouts]
+        formats: [:html, :json]
 
       import Plug.Conn
 

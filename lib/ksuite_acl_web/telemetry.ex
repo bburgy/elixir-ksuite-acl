@@ -1,4 +1,4 @@
-defmodule KsuiteMiddlewareWeb.Telemetry do
+defmodule KSuiteACLWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -63,7 +63,7 @@ defmodule KsuiteMiddlewareWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {KsuiteMiddlewareWeb, :count_users, []}
+      # {KSuiteACLWeb, :count_users, []}
     ]
   end
 end

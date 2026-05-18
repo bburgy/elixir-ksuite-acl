@@ -1,4 +1,4 @@
-defmodule KsuiteMiddlewareWeb.Models.KsuiteCalendarEvent do
+defmodule KSuiteACLWeb.Models.KsuiteCalendarEvent do
   @enforce_keys [:subject, :from, :to, :description]
   @derive Jason.Encoder
   defstruct [:subject, :from, :to, :description]

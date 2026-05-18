@@ -1,5 +1,5 @@
-defmodule KsuiteMiddlewareWeb.Router do
-  use KsuiteMiddlewareWeb, :router
+defmodule KSuiteACLWeb.Router do
+  use KSuiteACLWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,26 +10,26 @@ defmodule KsuiteMiddlewareWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", KsuiteMiddlewareWeb do
+  scope "/", KSuiteACLWeb do
     pipe_through :browser
 
     get "/", MainController, :index
   end
 
-  scope "/files", KsuiteMiddlewareWeb do
+  scope "/files", KSuiteACLWeb do
     pipe_through :api
 
     get "/:file_id", KdriveController, :pass_thru
   end
 
-  scope "/calendars", KsuiteMiddlewareWeb do
+  scope "/calendars", KSuiteACLWeb do
     pipe_through :api
 
     get "/:calendar_id", CalendarController, :get_events
   end
 
   # Enable LiveDashboard in development
-  if Application.compile_env(:ksuite_middleware, :dev_routes) do
+  if Application.compile_env(:ksuite_acl, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
     # If your application does not have an admins-only section yet,
@@ -40,7 +40,7 @@ defmodule KsuiteMiddlewareWeb.Router do
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
 
-      live_dashboard "/dashboard", metrics: KsuiteMiddlewareWeb.Telemetry
+      live_dashboard "/dashboard", metrics: KSuiteACLWeb.Telemetry
     end
   end
 end

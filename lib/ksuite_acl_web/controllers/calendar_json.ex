@@ -1,4 +1,4 @@
-defmodule KsuiteMiddlewareWeb.CalendarJSON do
+defmodule KSuiteACLWeb.CalendarJSON do
   def events(%{events: events}), do: events
 
   def render("400.json", %{reason: reason}),

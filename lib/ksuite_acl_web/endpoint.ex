@@ -1,12 +1,12 @@
-defmodule KsuiteMiddlewareWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :ksuite_middleware
+defmodule KSuiteACLWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ksuite_acl
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_ksuite_middleware_key",
+    key: "_ksuite_acl_key",
     signing_salt: "xJIdm2OH",
     same_site: "Lax"
   ]
@@ -19,9 +19,9 @@ defmodule KsuiteMiddlewareWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :ksuite_middleware,
+    from: :ksuite_acl,
     gzip: false,
-    only: KsuiteMiddlewareWeb.static_paths()
+    only: KSuiteACLWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -44,5 +44,5 @@ defmodule KsuiteMiddlewareWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug KsuiteMiddlewareWeb.Router
+  plug KSuiteACLWeb.Router
 end

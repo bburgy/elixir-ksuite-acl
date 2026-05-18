@@ -1,6 +1,7 @@
-defmodule KsuiteMiddleware.State do
-  alias Timex.TimezoneInfo
+defmodule KSuiteACL.State do
   use GenServer
+
+  alias Timex.TimezoneInfo
 
   # Client
 
@@ -34,7 +35,7 @@ defmodule KsuiteMiddleware.State do
 
   @impl true
   def handle_call(:get_ksuite_api_token, _from, state) do
-    api_token = Application.get_env(:ksuite_middleware, :ksuite_api_token)
+    api_token = Application.get_env(:ksuite_acl, :ksuite_api_token)
     {:reply, api_token, Map.put_new(state, :ksuite_api_token, api_token)}
   end
 
@@ -44,7 +45,7 @@ defmodule KsuiteMiddleware.State do
 
   @impl true
   def handle_call(:get_kdrive_id, _from, state) do
-    kdrive_id = Application.get_env(:ksuite_middleware, :kdrive_id)
+    kdrive_id = Application.get_env(:ksuite_acl, :kdrive_id)
     {:reply, kdrive_id, Map.put_new(state, :kdrive_id, kdrive_id)}
   end
 
@@ -54,9 +55,9 @@ defmodule KsuiteMiddleware.State do
 
   @impl true
   def handle_call(:get_caldav_client, _from, state) do
-    username = Application.get_env(:ksuite_middleware, :caldav_username)
-    password = Application.get_env(:ksuite_middleware, :caldav_password)
-    server = Application.get_env(:ksuite_middleware, :caldav_server)
+    username = Application.get_env(:ksuite_acl, :caldav_username)
+    password = Application.get_env(:ksuite_acl, :caldav_password)
+    server = Application.get_env(:ksuite_acl, :caldav_server)
 
     client = %CalDAVClient.Client{
       server_url: server,
@@ -71,7 +72,7 @@ defmodule KsuiteMiddleware.State do
 
   @impl true
   def handle_call(:get_timezone, _from, state) do
-    with %TimezoneInfo{} = timezone <- Application.get_env(:ksuite_middleware, :timezone) |> Timex.Timezone.get() do
+    with %TimezoneInfo{} = timezone <- Application.get_env(:ksuite_acl, :timezone) |> Timex.Timezone.get() do
       {:reply, timezone, Map.put_new(state, :timezone, timezone)}
     else
       {:error, :time_zone_not_found} -> raise("The environment variable TIMEZONE was missing.")

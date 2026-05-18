@@ -1,16 +1,16 @@
-# Ksuite-middleware
+# KSuite - Anti-Corruption Layer
 
-Project providing a single endpoint to access to many resources from a KSuite environment. Currently the middleware supports only kDrive files and the calendar events.
+Project providing a single endpoint to access to many resources from a KSuite environment. Currently the ACL supports only kDrive files and the calendar events.
 
 ![](diagram.png)
 
-## Kdrive
+## KDrive
 
 ```
 http://localhost:4000/files/<your-kdrive-file-id>
 ```
 
-## Calendar
+## Kalendar
 
 ```
 http://localhost:4000/calendars/<calendar_id>?from=<iso8601-datetime>&to=<iso8601-datetime>
@@ -19,7 +19,7 @@ http://localhost:4000/calendars/<calendar_id>?from=<iso8601-datetime>&to=<iso860
 ## Configuration
 
 | Environment variables | Description                                                                                                                      |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | KDRIVE_ID             | The identifier of your KDrive.                                                                                                   |
 | KSUITE_API_TOKEN      | The API token to use the KDrive API.                                                                                             |
 | PHX_HOST              | The host the web server. (default: example.com)                                                                                  |
@@ -31,10 +31,10 @@ http://localhost:4000/calendars/<calendar_id>?from=<iso8601-datetime>&to=<iso860
 | TIMEZONE              | The timezone used to determine the right date time when the server calDAV returns a daily event in UTC.                          |
 
 ```yaml
-version: '3'
+version: "3"
 services:
-  ksuite-middleware:
-    image: minidfx/ksuite-middleware:v0.6.0
+  ksuite-acl:
+    image: bburgy/ksuite-acl:v0.6.2
     environment:
       - SECRET_KEY_BASE=<secret>
       - PHX_HOST=<host>
@@ -73,7 +73,7 @@ mix deps.get && mix deps.compile && mix release
 3. Run it!
 
 ```bash
-_build/prod/rel/ksuite_middleware/bin/ksuite_middleware start
+_build/prod/rel/ksuite_acl/bin/ksuite_acl start
 ```
 
 ## Security considerations

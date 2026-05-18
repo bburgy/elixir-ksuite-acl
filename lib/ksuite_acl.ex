@@ -1,6 +1,6 @@
-defmodule KsuiteMiddleware do
+defmodule KSuiteACL do
   @moduledoc """
-  KsuiteMiddleware keeps the contexts that define your domain
+  KSuiteACL keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

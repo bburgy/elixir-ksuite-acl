@@ -1,13 +1,13 @@
-defmodule KsuiteMiddlewareWeb.CalendarController do
-  use KsuiteMiddlewareWeb, :controller
+defmodule KSuiteACLWeb.CalendarController do
+  use KSuiteACLWeb, :controller
 
-  alias KsuiteMiddlewareWeb.Models.KsuiteCalendarEvent
-  alias KsuiteMiddleware.State
+  alias KSuiteACLWeb.Models.KsuiteCalendarEvent
+  alias KSuiteACL.State
   alias Timex.TimezoneInfo
 
   require Logger
 
-  action_fallback KsuiteMiddleware.FallbackController
+  action_fallback KSuiteACL.FallbackController
 
   def get_events(conn, %{"from" => from, "to" => to, "calendar_id" => calendar_id}),
     do:

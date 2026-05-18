@@ -7,18 +7,18 @@
 # General application configuration
 import Config
 
-config :ksuite_middleware,
+config :ksuite_acl,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :ksuite_middleware, KsuiteMiddlewareWeb.Endpoint,
+config :ksuite_acl, KSuiteACLWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
   render_errors: [
-    formats: [json: KsuiteMiddlewareWeb.ErrorJSON],
+    formats: [json: KSuiteACLWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: KsuiteMiddleware.PubSub,
+  pubsub_server: KSuiteACL.PubSub,
   live_view: [signing_salt: "7nfCI6sX"]
 
 # Configures Elixir's Logger

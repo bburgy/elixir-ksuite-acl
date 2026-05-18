@@ -1,7 +1,7 @@
-defmodule KsuiteMiddleware.KsuiteClient do
+defmodule KSuiteACL.KsuiteClient do
   use Tesla
 
-  alias KsuiteMiddleware.State
+  alias KSuiteACL.State
 
   require Logger
 

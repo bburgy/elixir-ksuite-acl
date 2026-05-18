@@ -6,7 +6,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :ksuite_middleware, KsuiteMiddlewareWeb.Endpoint,
+config :ksuite_acl, KSuiteACLWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {0, 0, 0, 0}, port: 4000],
@@ -40,7 +40,7 @@ config :ksuite_middleware, KsuiteMiddlewareWeb.Endpoint,
 # different ports.
 
 # Enable dev routes for dashboard and mailbox
-config :ksuite_middleware, dev_routes: true
+config :ksuite_acl, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
@@ -52,7 +52,7 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-config :ksuite_middleware,
+config :ksuite_acl,
   kdrive_id: "",
   ksuite_api_token: "",
   caldav_username: "",

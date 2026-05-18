@@ -1,5 +1,5 @@
-defmodule KsuiteMiddlewareWeb.KdriveJSON do
-  alias KsuiteMiddleware.State
+defmodule KSuiteACLWeb.KdriveJSON do
+  alias KSuiteACL.State
 
   def render("400.json", %{reason: :invalid_integer}),
     do: %{title: "invalid argument", status: 400, detail: "The given file_id was invalid."}

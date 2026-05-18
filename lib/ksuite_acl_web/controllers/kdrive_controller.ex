@@ -1,9 +1,9 @@
-defmodule KsuiteMiddlewareWeb.KdriveController do
-  use KsuiteMiddlewareWeb, :controller
+defmodule KSuiteACLWeb.KdriveController do
+  use KSuiteACLWeb, :controller
 
-  alias KsuiteMiddleware.KsuiteClient
+  alias KSuiteACL.KsuiteClient
 
-  action_fallback KsuiteMiddleware.FallbackController
+  action_fallback KSuiteACL.FallbackController
 
   def pass_thru(conn, %{"file_id" => id}) when is_integer(id) do
     with {:ok, response} <- KsuiteClient.download(id) do

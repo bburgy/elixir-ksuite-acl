@@ -1,10 +1,10 @@
-defmodule KsuiteMiddleware.MixProject do
+defmodule KSuiteACL.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :ksuite_middleware,
-      version: "0.6.1",
+      app: :ksuite_acl,
+      version: "0.6.2",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -18,7 +18,7 @@ defmodule KsuiteMiddleware.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {KsuiteMiddleware.Application, []},
+      mod: {KSuiteACL.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

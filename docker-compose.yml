@@ -1,8 +1,8 @@
-version: '3'
+version: "3"
 services:
-  ksuite-middleware:
+  ksuite-acl:
     build: .
-    image: minidfx/ksuite-middleware:v0.6.1
+    image: bburgy/ksuite-acl:v0.6.2
     environment:
       - SECRET_KEY_BASE=<secret>
       - PHX_HOST=<host>

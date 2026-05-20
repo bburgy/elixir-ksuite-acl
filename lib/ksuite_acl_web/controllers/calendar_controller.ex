@@ -5,8 +5,6 @@ defmodule KSuiteACLWeb.CalendarController do
   alias KSuiteACLWeb.Models.KsuiteCalendarEvent
   alias Timex.TimezoneInfo
 
-  require Logger
-
   action_fallback KSuiteACLWeb.FallbackController
 
   def get_events(conn, %{"from" => from, "to" => to, "calendar_id" => calendar_id}),
@@ -31,11 +29,27 @@ defmodule KSuiteACLWeb.CalendarController do
     client = State.get_caldav_client()
     %CalDAVClient.Client{auth: %CalDAVClient.Auth.Basic{username: username}} = client
     calendar_url = CalDAVClient.URL.Builder.build_calendar_url(username, calendar_id)
+    event_name = [:ksuite_acl, :caldav, :get_events]
 
-    Logger.info("Reading the events from the calendar #{calendar_id} ...")
+    metadata = %{
+      calendar_id: calendar_id,
+      username: username,
+      from: from,
+      to: to
+    }
 
-    CalDAVClient.Event.get_events(client, calendar_url, from, to)
+    :telemetry.span(
+      event_name,
+      metadata,
+      fn ->
+        result = CalDAVClient.Event.get_events(client, calendar_url, from, to)
+        {result, %{status: status_code(result)}}
+      end
+    )
   end
+
+  defp status_code({:ok, _events}), do: :ok
+  defp status_code({:error, _reason}), do: :error
 
   defp send_response(conn, {:ok, events}),
     do: render(conn, :events, events: events)
@@ -61,8 +75,6 @@ defmodule KSuiteACLWeb.CalendarController do
       |> render(:"500", reason: reason)
 
   defp parse_params(from, to, calendar_id) do
-    Logger.info("Parsing the arguments ...")
-
     with {:ok, from} <- parse_datetime(:invalid_from, from),
          {:ok, to} <- parse_datetime(:invalid_to, to),
          {:ok, calendar_id} <- parse_calendar_id(calendar_id) do

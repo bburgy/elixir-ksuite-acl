@@ -51,6 +51,20 @@ defmodule KSuiteACLWeb.Telemetry do
         unit: {:native, :millisecond}
       ),
 
+      # Custom ACL
+      summary("ksuite_acl.caldav.get_events.duration",
+        unit: {:native, :millisecond},
+        description: "Duration of CalDAV get_events API calls",
+        # Allows filtering by calendar or success/failure in the UI
+        tags: [:calendar_id, :status]
+      ),
+
+      # Optional: Count the number of calls (success vs error)
+      last_value("ksuite_acl.caldav.get_events.duration",
+        tags: [:status],
+        description: "Latest call duration by status"
+      ),
+
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),

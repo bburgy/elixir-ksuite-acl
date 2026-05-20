@@ -34,7 +34,7 @@ http://localhost:4000/calendars/<calendar_id>?from=<iso8601-datetime>&to=<iso860
 version: "3"
 services:
   ksuite-acl:
-    image: bburgy/ksuite-acl:v0.6.2
+    image: bburgy/ksuite-acl:v0.6.3
     environment:
       - SECRET_KEY_BASE=<secret>
       - PHX_HOST=<host>

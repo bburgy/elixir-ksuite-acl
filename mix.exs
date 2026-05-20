@@ -51,7 +51,9 @@ defmodule KSuiteACL.MixProject do
       {:hackney, "~> 1.18"},
       {:caldav_client, "~> 2.0"},
       {:icalendar, git: "https://github.com/bburgy/icalendar", branch: "main"},
-      {:timex, "~> 3.7.13"}
+      {:timex, "~> 3.7.13"},
+      {:typedstruct, "~> 0.5.4"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 

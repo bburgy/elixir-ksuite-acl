@@ -6,9 +6,10 @@ defmodule KSuiteACLWeb.KdriveController do
   action_fallback KSuiteACLWeb.FallbackController
 
   def pass_thru(conn, %{"file_id" => id}) when is_integer(id) do
-    with {:ok, response} <- KsuiteClient.download(id) do
-      conn |> put_tesla_response(response)
-    else
+    case KsuiteClient.download(id) do
+      {:ok, response} ->
+        put_tesla_response(conn, response)
+
       _ ->
         conn
         |> put_status(:bad_gateway)
@@ -19,7 +20,7 @@ defmodule KSuiteACLWeb.KdriveController do
   def pass_thru(conn, %{"file_id" => raw_id}) do
     with {file_id, _} <- Integer.parse(raw_id),
          {:ok, response} <- KsuiteClient.download(file_id) do
-      conn |> put_tesla_response(response)
+      put_tesla_response(conn, response)
     else
       :error ->
         conn
@@ -60,11 +61,12 @@ defmodule KSuiteACLWeb.KdriveController do
   defp put_tesla_response(%Plug.Conn{} = conn, %Tesla.Env{} = response) do
     %Tesla.Env{status: status, body: body} = response
 
-    with {:ok, content_type} <- safe_get_header(response, "content-type") do
-      conn
-      |> put_resp_content_type(content_type)
-      |> resp(status, body)
-    else
+    case safe_get_header(response, "content-type") do
+      {:ok, content_type} ->
+        conn
+        |> put_resp_content_type(content_type)
+        |> resp(status, body)
+
       _ ->
         conn
         |> put_status(status)

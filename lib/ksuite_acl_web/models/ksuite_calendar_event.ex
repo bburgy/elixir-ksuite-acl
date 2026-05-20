@@ -1,6 +1,14 @@
 defmodule KSuiteACLWeb.Models.KsuiteCalendarEvent do
-  @enforce_keys [:subject, :from, :to, :description]
+  use TypedStruct
+
   @derive Jason.Encoder
-  defstruct [:subject, :from, :to, :description]
-  @type t :: %__MODULE__{subject: String.t(), from: String.t(), to: String.t(), description: String.t()}
+
+  typedstruct do
+    @typedoc "A Kalendar Event"
+
+    field(:subject, String.t(), enforce: true)
+    field(:from, String.t(), enforce: true)
+    field(:to, String.t(), enforce: true)
+    field(:description, String.t(), enforce: true)
+  end
 end

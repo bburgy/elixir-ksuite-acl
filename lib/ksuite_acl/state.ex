@@ -72,9 +72,10 @@ defmodule KSuiteACL.State do
 
   @impl true
   def handle_call(:get_timezone, _from, state) do
-    with %TimezoneInfo{} = timezone <- Application.get_env(:ksuite_acl, :timezone) |> Timex.Timezone.get() do
-      {:reply, timezone, Map.put_new(state, :timezone, timezone)}
-    else
+    timezone = Application.get_env(:ksuite_acl, :timezone) |> Timex.Timezone.get()
+
+    case timezone do
+      %TimezoneInfo{} -> {:reply, timezone, Map.put_new(state, :timezone, timezone)}
       {:error, :time_zone_not_found} -> raise("The environment variable TIMEZONE was missing.")
     end
   end

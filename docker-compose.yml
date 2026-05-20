@@ -2,7 +2,7 @@ version: "3"
 services:
   ksuite-acl:
     build: .
-    image: bburgy/ksuite-acl:v0.6.2
+    image: bburgy/ksuite-acl:v0.6.3
     environment:
       - SECRET_KEY_BASE=<secret>
       - PHX_HOST=<host>
